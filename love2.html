@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Love Calculator</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      background-color: #fce4ec;
+      margin: 50px;
+    }
+
+    h1 {
+      color: #e91e63;
+    }
+
+    .nameInput {
+      padding: 10px;
+      font-size: 1em;
+      margin: 10px;
+    }
+
+    #calculateBtn {
+      padding: 10px;
+      background-color: #e91e63;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    #result {
+      font-size: 1.5em;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Love Calculator</h1>
+  <p>Enter two names and find out your love compatibility:</p>
+
+  <input type="text" class="nameInput" id="firstName" placeholder="Enter the first name">
+  <input type="text" class="nameInput" id="secondName" placeholder="Enter the second name">
+  <button id="calculateBtn" onclick="calculateLove()">Calculate</button>
+
+  <p id="result"></p>
+
+  <script>
+    function calculateLove() {
+      const firstName = document.getElementById('firstName').value.toLowerCase();
+      const secondName = document.getElementById('secondName').value.toLowerCase();
+
+      // Check if both names are entered
+      if (firstName.trim() === '' || secondName.trim() === '') {
+        document.getElementById('result').innerHTML = 'Please enter both names!';
+        return;
+      }
+
+      const namesInput = `${firstName} ${secondName}`;
+
+      // Check for special case: "Ronaldo" and "Kelsey"
+      if (namesInput.includes("ronaldo") && namesInput.includes("kelsey")) {
+        document.getElementById('result').innerHTML = "Warning! Love overload! 💥Love Percentage = 1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%";
+        return;
+      }
+
+      // Simple algorithm to calculate a "love score" based on the characters in the names
+      let loveScore = 0;
+      for (let i = 0; i < namesInput.length; i++) {
+        loveScore += namesInput.charCodeAt(i);
+      }
+
+      // Map the love score to a percentage
+      const lovePercentage = (loveScore % 100) + 1;
+
+      document.getElementById('result').innerHTML = `Love Compatibility: ${lovePercentage}%`;
+    }
+  </script>
+
+</body>
+</html>
